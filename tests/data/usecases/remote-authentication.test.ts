@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 
 import { HttpStatusCode } from '@/data/protocols/http'
 import { RemoteAuthentication } from '@/data/usecases/authentication'
-import { InvalidCredentialsError } from '@/domain/error'
+import { InvalidCredentialsError, UnexpectedError } from '@/domain/error'
 import { HttpPostClientSpy } from '@/tests/data/mocks'
 import { mockAuthentication } from '@/tests/domain/mocks'
 
@@ -45,5 +45,14 @@ describe('RemoteAuthentication', () => {
     }
     const promise = sut.auth(mockAuthentication())
     await expect(promise).rejects.toThrow(new InvalidCredentialsError())
+  })
+
+  it('Should throw UnexpectedError if HttpPostClient returns 400', async () => {
+    const { sut, httpPostClientSpy } = makeSut()
+    httpPostClientSpy.response = {
+      statusCode: HttpStatusCode.badRequest
+    }
+    const promise = sut.auth(mockAuthentication())
+    await expect(promise).rejects.toThrow(new UnexpectedError())
   })
 })
