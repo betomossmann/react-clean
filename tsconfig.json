@@ -23,10 +23,11 @@
     "rootDirs": ["src", "tests"],
     "baseUrl": "src",
     "paths": {
-      "@/*": ["*"]
-    },
-    "allowSyntheticDefaultImports": true
+      "@/*": ["*"],
+      "@/tests/*": ["../tests/*"]
+    }
   },
-  "include": ["src"],
+  "include": ["src", "tests"],
+  "exclude": ["tests/e2e/cypress"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -1,9 +1,9 @@
 import { faker } from '@faker-js/faker'
 import { describe, expect, it } from 'vitest'
 
-import { HttpPostClientSpy } from '../__mocks__/data'
-import { mockAuthentication } from '../__mocks__/domain'
-import { RemoteAuthentication } from '../src/data/usecases/authentication'
+import { RemoteAuthentication } from '@/data/usecases/authentication'
+import { HttpPostClientSpy } from '@/tests/data/mocks'
+import { mockAuthentication } from '@/tests/domain/mocks'
 
 // SUT = System Under Test
 
