@@ -38,7 +38,7 @@ module.exports = {
       files: ['*.ts', '*.tsx'],
       rules: {
         'sort-keys-fix/sort-keys-fix': 'warn',
-        '@typescript-eslint/no-unused-vars': 'warn'
+        '@typescript-eslint/no-unused-vars': 'off'
       }
     }
   ]
