@@ -4,6 +4,8 @@ import { describe, expect, it } from 'vitest'
 import { HttpStatusCode } from '@/data/protocols/http'
 import { RemoteAuthentication } from '@/data/usecases/authentication'
 import { InvalidCredentialsError, UnexpectedError } from '@/domain/error'
+import { AccountModel } from '@/domain/models'
+import { AuthenticationParams } from '@/domain/usecases'
 import { HttpPostClientSpy } from '@/tests/data/mocks'
 import { mockAuthentication } from '@/tests/domain/mocks'
 
@@ -11,11 +13,11 @@ import { mockAuthentication } from '@/tests/domain/mocks'
 
 type SutTypes = {
   sut: RemoteAuthentication
-  httpPostClientSpy: HttpPostClientSpy
+  httpPostClientSpy: HttpPostClientSpy<AuthenticationParams, AccountModel>
 }
 
 const makeSut = (url: string = faker.internet.url()): SutTypes => {
-  const httpPostClientSpy = new HttpPostClientSpy()
+  const httpPostClientSpy = new HttpPostClientSpy<AuthenticationParams, AccountModel>()
   const sut = new RemoteAuthentication(url, httpPostClientSpy)
   return {
     httpPostClientSpy,
